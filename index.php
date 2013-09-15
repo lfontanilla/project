@@ -175,7 +175,7 @@
           <ul class="thumbnails">
             <img id="loading" class="loading" src="img/loading.gif" alt="loading...">
             <?php
-            $con = mysqli_connect("localhost", "root", "", "company");
+            $con = mysqli_connect("mysql3.000webhost.com", "a4187511_root", "T4kt1ks1", "a4187511_company");
 // Check connection
             if (mysqli_connect_errno()) {
               echo "Failed to connect to MySQL: " . mysqli_connect_error();
