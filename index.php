@@ -35,24 +35,9 @@
             <!-- Start: Primary navigation -->
             <div class="nav-collapse collapse">        
               <ul class="nav pull-right">
+                <li><a href="all_products.html">Products</a></li>                
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products and Services<b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li class="nav-header">PRODUCTS</li>
-                    <li><a href="product.html">Product1</a></li>
-                    <li><a href="product.html">Product2</a></li>
-                    <li><a href="product.html">Product3</a></li>
-                    <li><a href="all_products.html">All products</a></li>             
-                    <li class="divider"></li>
-                    <li class="nav-header">SERVICES</li>
-                    <li><a href="service.html">Service1</a></li>
-                    <li><a href="service.html">Service2</a></li>
-                    <li><a href="service.html">Service3</a></li>
-                    <li><a href="all_services.html">All services</a></li>
-                  </ul>                  
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-hover="dropdown">About<b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a href="our_works.html">Our works</a></li>
                     <li><a href="patnerships.html">Parnerships</a></li>
@@ -64,8 +49,8 @@
                 </li>
                 <li><a href="faq.html">FAQ</a></li>
                 <li><a href="contact_us.html">Contact us</a></li>
-                <li><a href="signup.html">Sign up</a></li>
-                <li><a href="signin.html">Sign in</a></li>
+                <!--                <li><a href="signup.html">Sign up</a></li>
+                                <li><a href="signin.html">Sign in</a></li>-->
               </ul>
             </div>
           </div>
@@ -175,7 +160,7 @@
           <ul class="thumbnails">
             <img id="loading" class="loading" src="img/loading.gif" alt="loading...">
             <?php
-            $con = mysqli_connect("mysql3.000webhost.com", "a4187511_root", "T4kt1ks1", "a4187511_company");
+            $con = mysqli_connect("localhost", "root", "", "company");
 // Check connection
             if (mysqli_connect_errno()) {
               echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -305,6 +290,8 @@
 
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/boot-business.js"></script>    
+    <script type="text/javascript" src="js/boot-business.js"></script>
+    <script type="text/javascript" src="js/twitter-bootstrap-hover-dropdown.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
   </body>
 </html>
