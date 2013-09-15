@@ -25,7 +25,7 @@
       <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
           <div class="container">
-            <a href="index.html" class="brand brand-bootbus">Bootbusiness</a>
+            <a href="index.php" class="brand brand-bootbus">Bootbusiness</a>
             <!-- Below button used for responsive navigation -->
             <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
               <span class="icon-bar"></span>
@@ -35,7 +35,7 @@
             <!-- Start: Primary navigation -->
             <div class="nav-collapse collapse">        
               <ul class="nav pull-right">
-                <li><a href="all_products.html">Products</a></li>                
+                <li><a href="all_products.php">All Products</a></li>                
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-hover="dropdown">About<b class="caret"></b></a>
                   <ul class="dropdown-menu">
@@ -49,14 +49,12 @@
                 </li>
                 <li><a href="faq.html">FAQ</a></li>
                 <li><a href="contact_us.html">Contact us</a></li>
-                <!--                <li><a href="signup.html">Sign up</a></li>
-                                <li><a href="signin.html">Sign in</a></li>-->
               </ul>
             </div>
           </div>
         </div>
       </div>
-      <!-- End: Navigation wrapper -->   
+      <!-- End: Navigation wrapper -->
     </header>
     <!-- End: HEADER -->
     <!-- Start: MAIN CONTENT -->
@@ -158,7 +156,7 @@
         </div>
         <div class="row">
           <ul class="thumbnails">
-            <img id="loading" class="loading" src="img/loading.gif" alt="loading...">
+            <img id="loading" src="img/loading.gif" alt="loading...">
             <?php
             $con = mysqli_connect("localhost", "root", "", "company");
 // Check connection
@@ -166,7 +164,7 @@
               echo "Failed to connect to MySQL: " . mysqli_connect_error();
             } else {
               $result = mysqli_query($con, "SELECT name, description, pict, catchphrase FROM products ORDER BY RAND() LIMIT 6;");
-              echo '<script>$(".loading").remove();</script>';
+              echo '<script>$("#loading").remove();</script>';
               while ($row = mysqli_fetch_array($result)) {
                 ?>                
                 <li class="span4">
@@ -210,7 +208,7 @@
                 <li><a href="product.html">Product1</a></li>
                 <li><a href="product.html">Product2</a></li>
                 <li><a href="product.html">Product3</a></li>
-                <li><a href="all_products.html">All products</a></li>
+                <li><a href="all_products.php">All products</a></li>
               </ul>
             </nav>
             <h4><i class="icon-cogs icon-white"></i> Services</h4>
@@ -289,8 +287,7 @@
     <!-- End: FOOTER -->
 
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/boot-business.js"></script>    
-    <script type="text/javascript" src="js/boot-business.js"></script>
+    <script type="text/javascript" src="js/boot-business.js"></script>        
     <script type="text/javascript" src="js/twitter-bootstrap-hover-dropdown.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
   </body>
