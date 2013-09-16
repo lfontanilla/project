@@ -38,14 +38,24 @@ $(function() {
       $('.pagination li').removeClass('active');
       self.PageIndex(self.PageIndex() - 1);
       var page = self.PageIndex() + 1;
-      $('#page'+page).addClass('active');
+      $('#page' + page).addClass('active');
+      $('.thumbnail').hover(function() {
+        $(this).find('.hover-widget').fadeIn();
+      }, function() {
+        $(this).find('.hover-widget').fadeOut();
+      });
     };
 
     self.NextPage = function() {
       $('.pagination li').removeClass('active');
       self.PageIndex(self.PageIndex() + 1);
       var page = self.PageIndex() + 1;
-      $('#page'+page).addClass('active');
+      $('#page' + page).addClass('active');
+      $('.thumbnail').hover(function() {
+        $(this).find('.hover-widget').fadeIn();
+      }, function() {
+        $(this).find('.hover-widget').fadeOut();
+      });
     };
 
     self.PagedRows = ko.dependentObservable(function() {
@@ -98,18 +108,16 @@ $(function() {
           self.NextPage();
       else
         for (var i = pagetogo; i >= pagetogo; i--)
-          self.PreviousPage();      
+          self.PreviousPage();
     }
   }
 
   var vm = new ViewModel();
   ko.applyBindings(vm);
-
   $('.thumbnail').hover(function() {
     $(this).find('.hover-widget').fadeIn();
   }, function() {
     $(this).find('.hover-widget').fadeOut();
   });
   $('#page1').addClass("active");
-
 });
