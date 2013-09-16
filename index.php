@@ -158,10 +158,9 @@
           <ul class="thumbnails">
             <img id="loading" src="img/loading.gif" alt="loading...">
             <?php
-            $con = mysqli_connect("localhost", "root", "", "company");
-// Check connection
-            if (mysqli_connect_errno()) {
-              echo "Failed to connect to MySQL: " . mysqli_connect_error();
+            include('libraries/config.php');
+            if ($con == "") {
+              echo "Failed to connect to MySQL";
             } else {
               $result = mysqli_query($con, "SELECT name, description, pict, catchphrase FROM products ORDER BY RAND() LIMIT 6;");
               echo '<script>$("#loading").remove();</script>';

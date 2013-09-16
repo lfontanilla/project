@@ -80,11 +80,10 @@
           <ul class="thumbnails">
             <img id="loading" src="img/loading.gif" alt="loading...">
             <?php
-            $con = mysqli_connect("localhost", "root", "", "company");
-            // Check connection
+            include('libraries/config.php');
             $my_array = array();
-            if (mysqli_connect_errno()) {
-              echo "Failed to connect to MySQL: " . mysqli_connect_error();
+            if ($con == "") {
+              echo "Failed to connect to MySQL";
             } else {
               $result = mysqli_query($con, "SELECT id, name, description, pict, catchphrase FROM products");
               echo '<script>$("#loading").remove();</script>';
