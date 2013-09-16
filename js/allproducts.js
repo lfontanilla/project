@@ -47,7 +47,7 @@ $(function() {
       self.PageIndex(self.PageIndex() - 1);
       var page = self.PageIndex() + 1;
       $('#page' + page).addClass('active');
-      bindProductHover();
+//      bindProductHover();
     };
 
     self.NextPage = function() {
@@ -55,7 +55,7 @@ $(function() {
       self.PageIndex(self.PageIndex() + 1);
       var page = self.PageIndex() + 1;
       $('#page' + page).addClass('active');
-      bindProductHover();
+//      bindProductHover();
     };
 
     self.PagedRows = ko.dependentObservable(function() {
@@ -72,6 +72,11 @@ $(function() {
         return self.Products.slice(start, size + start);
       }
     });
+
+    self.fadeInProductOptions = function(data) {
+      $('.hover-widget').removeClass('load');
+      $('#thumb'+data.id()).addClass('load');
+    }
 
     function filter() {
       return ko.utils.arrayFilter(self.Products(), function(item) {
@@ -114,6 +119,6 @@ $(function() {
 
   var vm = new ViewModel();
   ko.applyBindings(vm);
-  bindProductHover();
+//  bindProductHover();
   $('#page1').addClass("active");
 });

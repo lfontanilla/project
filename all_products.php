@@ -68,13 +68,8 @@
         </div>
         <div class="row-fluid">
           <h4 class="span2">Filter Options</h4>
-
-
           <select class="span2" data-bind="options: filterOptions, value: selectedOption, optionsText: 'Name'"></select>
-
-
           <input class="span4" type="text" placeholder="filter the results" autofocus="" data-bind="value: filterValue, valueUpdate : 'afterkeydown'" />
-
         </div>
         <div class="row">
           <ul class="thumbnails">
@@ -99,14 +94,14 @@
             </script>
             <div data-bind="foreach: PagedRows">
               <li class="span4">
-                <div class="thumbnail">
+                <div class="thumbnail" data-bind='event:{mouseover:$parent.fadeInProductOptions}'>
                   <img data-bind='attr: {src: "img/productimages/"+ pict(), alt: name }'>                  
                   <div class="caption">
                     <h3 data-bind="text: name"></h3>
                     <p data-bind="text: description">                    
                     </p>
                   </div>
-                  <div class="hover-widget">
+                  <div class="hover-widget" data-bind='attr:{id:"thumb"+id()}'>
                     <div class="widget-footer">
                       <p>
                         <a href="#" class="btn btn-primary">Agregar a cotización</a>&nbsp;

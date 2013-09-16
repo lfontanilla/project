@@ -126,19 +126,26 @@
   margin-top: 130px;
   padding: 20px;
 }
-.hover-widget{
-  display: none;
+.hover-widget{  
   height: 100%;
   position: absolute;
   right: 0;
   top: 0;
   width: 100%;
   background-color:rgba(40,40,40,0.3);
+  opacity: 0;    
+  -webkit-transition: opacity 0.5s ease-in;
+  -moz-transition: opacity 0.5s ease-in;
+  -o-transition: opacity 0.5s ease-in;
+  -ms-transition: opacity 0.5s ease-in;
+  transition: opacity 0.5s ease-in;
+}
+.hover-widget.load {
+  opacity: 1;
 }
 .thumbnail{
   position: relative !important;
 }
-
 .widget-footer p {
   margin: 0;
 }
@@ -323,4 +330,3 @@ footer {
     padding-top: 70px;
   }
 }
-/* End : Responsive CSS section */
