@@ -35,11 +35,17 @@ $(function() {
     }, null, "beforeChange");
 
     self.PreviousPage = function() {
+      $('.pagination li').removeClass('active');
       self.PageIndex(self.PageIndex() - 1);
+      var page = self.PageIndex() + 1;
+      $('#page'+page).addClass('active');
     };
 
     self.NextPage = function() {
+      $('.pagination li').removeClass('active');
       self.PageIndex(self.PageIndex() + 1);
+      var page = self.PageIndex() + 1;
+      $('#page'+page).addClass('active');
     };
 
     self.PagedRows = ko.dependentObservable(function() {
@@ -86,16 +92,13 @@ $(function() {
       var pagetogo = item.pageToGo - self.PageIndex();
       if (!pagetogo)
         return;
-      var currentpage = self.PageIndex() + 1;      
-      $('#page' + currentpage).removeClass('active');
       var nextpage = item.pageToGo + 1;
       if (pagetogo > 0)
         for (var i = 0; i < pagetogo; i++)
-          self.PageIndex(self.PageIndex() + 1);
+          self.NextPage();
       else
         for (var i = pagetogo; i >= pagetogo; i--)
-          self.PageIndex(self.PageIndex() - 1);
-      $('#page' + nextpage).addClass("active");
+          self.PreviousPage();      
     }
   }
 
