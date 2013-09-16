@@ -8,6 +8,14 @@ $(function() {
     self.catchphrase = ko.observable(data.catchphrase);
   };
 
+  function bindProductHover() {
+    $('.thumbnail').hover(function() {
+      $(this).find('.hover-widget').fadeIn();
+    }, function() {
+      $(this).find('.hover-widget').fadeOut();
+    });
+  }
+
   function ViewModel() {
     var self = this;
     self.Products = ko.observableArray([]);
@@ -39,11 +47,7 @@ $(function() {
       self.PageIndex(self.PageIndex() - 1);
       var page = self.PageIndex() + 1;
       $('#page' + page).addClass('active');
-      $('.thumbnail').hover(function() {
-        $(this).find('.hover-widget').fadeIn();
-      }, function() {
-        $(this).find('.hover-widget').fadeOut();
-      });
+      bindProductHover();
     };
 
     self.NextPage = function() {
@@ -51,11 +55,7 @@ $(function() {
       self.PageIndex(self.PageIndex() + 1);
       var page = self.PageIndex() + 1;
       $('#page' + page).addClass('active');
-      $('.thumbnail').hover(function() {
-        $(this).find('.hover-widget').fadeIn();
-      }, function() {
-        $(this).find('.hover-widget').fadeOut();
-      });
+      bindProductHover();
     };
 
     self.PagedRows = ko.dependentObservable(function() {
@@ -114,10 +114,6 @@ $(function() {
 
   var vm = new ViewModel();
   ko.applyBindings(vm);
-  $('.thumbnail').hover(function() {
-    $(this).find('.hover-widget').fadeIn();
-  }, function() {
-    $(this).find('.hover-widget').fadeOut();
-  });
+  bindProductHover();
   $('#page1').addClass("active");
 });
