@@ -18,6 +18,85 @@ $(function() {
     });
     self.Products(productsmapped);
 
+    //filter and search vars
+    self.filterOptions = ko.observableArray([
+      {value: "name", Name: "Name"},
+      {value: "description", Name: "description"}]);
+
+    self.selectedOption = ko.observable("");
+    self.filterValue = ko.observable("");
+
+    self.SizeOfAll = ko.observable(0);
+    self.PageSize = ko.observable(6);
+    self.PageIndex = ko.observable(0);
+
+    self.filterValue.subscribe(function(oldValue) {
+      self.PageIndex(0);
+    }, null, "beforeChange");
+
+    self.PreviousPage = function() {
+      self.PageIndex(self.PageIndex() - 1);
+    };
+
+    self.NextPage = function() {
+      self.PageIndex(self.PageIndex() + 1);
+    };
+
+    self.PagedRows = ko.dependentObservable(function() {
+      var size = self.PageSize();
+      var start = self.PageIndex() * size;
+      if (self.filterValue()) {
+        start = self.PageIndex() * size;
+        var stuff = filter();
+        self.SizeOfAll(stuff.length);
+        return stuff.slice(start, size + start);
+      }
+      else {
+        self.SizeOfAll(self.Products().length);
+        return self.Products.slice(start, size + start);
+      }
+    });
+
+    function filter() {
+      return ko.utils.arrayFilter(self.Products(), function(item) {
+        if (self.selectedOption().value == "name")
+          return item.name().toLowerCase().indexOf(self.filterValue().toLowerCase()) != -1;
+        if (self.selectedOption().value == "description")
+          return item.description().toString().toLowerCase().indexOf(self.filterValue().toLowerCase()) != -1;
+      });
+    }
+
+    self.MaxPageIndex = ko.dependentObservable(function() {
+      return Math.ceil(self.SizeOfAll() / self.PageSize()) - 1;
+    });
+
+    self.MaxPagesArray = ko.observableArray([]);
+
+    self.MaxPageIndex = ko.dependentObservable(function() {
+      var maxpageindex = Math.ceil(self.SizeOfAll() / self.PageSize()) - 1;
+      self.MaxPagesArray([]);
+      var arr = [];
+      for (var i = 0; i <= maxpageindex; i++)
+        arr.push({"name": i + 1, "pageToGo": i});
+      self.MaxPagesArray(arr);
+      return maxpageindex;
+    });
+
+    self.goto = function(item) {
+      var pagetogo = item.pageToGo - self.PageIndex();
+      if (!pagetogo)
+        return;
+      var currentpage = self.PageIndex() + 1;      
+      $('#page' + currentpage).removeClass('active');
+      var nextpage = item.pageToGo + 1;
+      if (pagetogo > 0)
+        for (var i = 0; i < pagetogo; i++)
+          self.PageIndex(self.PageIndex() + 1);
+      else
+        for (var i = pagetogo; i >= pagetogo; i--)
+          self.PageIndex(self.PageIndex() - 1);
+      $('#page' + nextpage).addClass("active");
+    }
   }
 
   var vm = new ViewModel();
@@ -28,6 +107,6 @@ $(function() {
   }, function() {
     $(this).find('.hover-widget').fadeOut();
   });
-
+  $('#page1').addClass("active");
 
 });

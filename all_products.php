@@ -61,8 +61,20 @@
     <div class="content">
       <!-- Start: PRODUCT LIST -->
       <div class="container">
-        <div class="page-header">
-          <h2>Our products</h2>
+        <div class="row-fluid">
+          <div class="span4">
+            <h2>Our products</h2>              
+          </div>
+        </div>
+        <div class="row-fluid">
+          <h4 class="span2">Filter Options</h4>
+
+
+          <select class="span2" data-bind="options: filterOptions, value: selectedOption, optionsText: 'Name'"></select>
+
+
+          <input class="span4" type="text" placeholder="filter the results" autofocus="" data-bind="value: filterValue, valueUpdate : 'afterkeydown'" />
+
         </div>
         <div class="row">
           <ul class="thumbnails">
@@ -86,7 +98,7 @@
             <script>
               var data = <?php echo json_encode($data); ?>;
             </script>
-            <div data-bind="foreach: Products">
+            <div data-bind="foreach: PagedRows">
               <li class="span4">
                 <div class="thumbnail">
                   <img data-bind='attr: {src: "img/productimages/"+ pict(), alt: name }'>                  
@@ -111,29 +123,17 @@
       </div>
       <div class="pagination pagination-centered">
         <ul>
-          <li class="disabled">
-            <a href="#">&laquo;</a>
+          <li data-bind="visible: PageIndex() > 0">
+            <a href="#" data-bind="click: PreviousPage">&laquo;</a>
           </li>
-          <li class="active">
-            <a href="#">1</a>
-          </li>
-          <li>
-            <a href="#">2</a>
-          </li>
-          <li>
-            <a href="#">3</a>
-          </li>
-          <li>
-            <a href="#">4</a>
-          </li>
-          <li>
-            <a href="#">5</a>
-          </li>
-          <li>
-            <a href="#">6</a>
-          </li>
-          <li>
-            <a href="#">&raquo;</a>
+          <div data-bind='foreach: MaxPagesArray'>
+            <li data-bind='attr:{id:"page"+name}'>
+              <a href="#" data-bind='text: name, click: $parent.goto'></a>
+            </li>  
+          </div>
+
+          <li data-bind="visible: PageIndex() < MaxPageIndex()">
+            <a href="#" data-bind="click: NextPage">&raquo;</a>
           </li>
         </ul>
       </div>
