@@ -1,6 +1,10 @@
 <?php
 
 // Connection's Parameters
+//$db_host = "mysql3.000webhost.com";
+//$db_name = "a4187511_company";
+//$username = "a4187511_root";
+//$password = "T4kt1ks1";
 $db_host = "localhost";
 $db_name = "company";
 $username = "root";
