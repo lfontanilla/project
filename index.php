@@ -159,37 +159,42 @@
             <img id="loading" src="img/loading.gif" alt="loading...">
             <?php
             include('libraries/config.php');
+            $my_array = array();
             if ($con == "") {
               echo "Failed to connect to MySQL";
             } else {
-              $result = mysqli_query($con, "SELECT name, description, pict, catchphrase FROM products ORDER BY RAND() LIMIT 6;");
+              $result = mysqli_query($con, "SELECT id, name, description, pict, catchphrase FROM products ORDER BY RAND() LIMIT 6");
               echo '<script>$("#loading").remove();</script>';
               while ($row = mysqli_fetch_array($result)) {
-                ?>                
-                <li class="span4">
-                  <div class="thumbnail">
-                    <img src="img/productimages/<?php echo $row['pict']; ?>" alt="<?php echo $row['name']; ?>">
-                    <div class="caption">
-                      <h3><?php echo $row['name']; ?></h3>
-                      <p>
-                        <?php echo $row['description']; ?>
-                      </p>
-                    </div>
-                    <div class="hover-widget">
-                      <div class="widget-footer">
-                        <p>
-                          <a href="#" class="btn btn-primary">Agregar a cotización</a>&nbsp;
-                          <a href="product.html" class="btn">Leer mas</a>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <?php
+                $my_array[] = $row;
               }
+              $data = $my_array;
             }
             mysqli_close($con);
             ?>
+            <script>
+              var data = <?php echo json_encode($data); ?>;
+            </script>
+            <div data-bind="foreach: PagedRows">
+              <li class="span4">
+                <div class="thumbnail" data-bind='event:{mouseover:$parent.fadeInProductOptions}'>
+                  <img data-bind='attr: {src: "img/productimages/"+ pict(), alt: name }'>                  
+                  <div class="caption">
+                    <h3 data-bind="text: name"></h3>
+                    <p data-bind="text: description">                    
+                    </p>
+                  </div>
+                  <div class="hover-widget" data-bind='attr:{id:"thumb"+id()}'>
+                    <div class="widget-footer">
+                      <p>
+                        <a href="#" class="btn btn-primary">Agregar a cotización</a>&nbsp;
+                        <a href="product.html" class="btn">Leer mas</a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </div>
           </ul>
         </div>          
       </div>
@@ -288,6 +293,6 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/boot-business.js"></script>        
     <script type="text/javascript" src="js/twitter-bootstrap-hover-dropdown.min.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/allproducts.js"></script>
   </body>
 </html>
